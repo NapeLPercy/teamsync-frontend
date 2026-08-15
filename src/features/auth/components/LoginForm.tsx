@@ -4,6 +4,7 @@ import { Input } from "../../../components/ui/input/Input";
 import { Checkbox } from "../../../components/ui/checkbox/Checkbox";
 import SocialAuth from "./SocialAuth";
 import "../../../styles/auth.css";
+import { useLogin } from "../hooks/useLogin";
 
 interface LoginValues {
   email: string;
@@ -40,22 +41,18 @@ interface LoginFormProps {
   onForgotPasswordClick?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({
-  onSubmit,
-  onCreateAccountClick,
-  onForgotPasswordClick,
-}) => {
+export const LoginForm: React.FC<LoginFormProps> = () => {
   const [values, setValues] = useState<LoginValues>({
     email: "",
     password: "",
     rememberMe: false,
   });
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const errors = validate(values);
   const isValid = Object.keys(errors).length === 0;
+
+  const loginMutation = useLogin();
 
   const handleChange =
     (field: keyof LoginValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,32 +64,22 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  //handle login form submission
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({ email: true, password: true });
-    setSubmitError(null);
-
-    if (!isValid) return;
-
-    try {
-      setIsSubmitting(true);
-      await onSubmit?.(values);
-    } catch (err) {
-      setSubmitError(
-        err instanceof Error ? err.message : "Invalid email or password.",
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+    let { email, password } = values;
+    loginMutation.mutate({
+      email,
+      password,
+    });
   };
-
   return (
     <div className="auth-card">
       <h1 className="auth-title">Log in</h1>
       <p className="auth-subtitle">Welcome back to teamsyc.</p>
 
-      <form className="auth-form" onSubmit={handleSubmit} noValidate>
-        {submitError && <div className="auth-submit-error">{submitError}</div>}
+      <form className="auth-form" method="POST" onSubmit={handleSubmit}>
+        {/*noValidate*/}
 
         <Input
           label="Email"
@@ -125,16 +112,26 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <a
             className="auth-link"
             href="/forgot-password"
-            onClick={onForgotPasswordClick}
+            // onClick={onForgotPasswordClick}
           >
             Forgot password?
           </a>
         </div>
 
+        {/*Login error */}
+        {loginMutation.isError && (
+          <div className="auth-submit-error">{loginMutation.error.message}</div>
+        )}
+
+        {loginMutation.isSuccess && (
+          <div className="auth-submit-success">
+            {loginMutation.data.message}
+          </div>
+        )}
         <Button
           type="submit"
           fullWidth
-          isLoading={isSubmitting}
+          isLoading={loginMutation.isPending}
           disabled={!isValid}
         >
           Log in
@@ -145,7 +142,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
       <div className="auth-footer">
         Don&apos;t have an account?{" "}
-        <a className="auth-link" href="/sign-up" onClick={onCreateAccountClick}>
+        <a
+          className="auth-link"
+          href="/sign-up"
+          // onClick={onCreateAccountClick}
+        >
           Create one
         </a>
       </div>

@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
+import Hero from "./Hero";
 export default function HomePage() {
   return (
-    <div>
-      <Link to="/sign-in">Sign in</Link>
-      <Link to="/sign-up">Sign up</Link>
-    </div>
+    <Hero/>
   );
 }

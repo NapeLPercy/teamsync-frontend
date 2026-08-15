@@ -7,7 +7,7 @@ export default function Login() {
       heading="Run your team without the chaos"
       subtext="Plans, docs, and updates — all in one place."
     >
-      <LoginForm onSubmit={() => {}} />
+      <LoginForm />
     </AuthLayout>
   );
 }

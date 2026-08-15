@@ -3,6 +3,7 @@ import Button from "../../../components/ui/button/Button";
 import Input from "../../../components/ui/input/Input";
 import Checkbox from "../../../components/ui/checkbox/Checkbox";
 import SocialAuth from "./SocialAuth";
+import { useRegister } from "../hooks/useRegister";
 import "../../../styles/auth.css";
 
 interface CreateAccountValues {
@@ -79,8 +80,10 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     acceptTerms: false,
   });
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const { data, isPending, isError, error, isSuccess, mutate } = useRegister();
 
   const errors = validate(values);
   const isValid = Object.keys(errors).length === 0;
@@ -96,30 +99,41 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({
-      email: true,
-      companyName: true,
-      fullName: true,
-      password: true,
-      acceptTerms: true,
+    const { email, password, fullName, companyName } = values;
+
+    mutate({
+      email,
+      password,
+      companyName,
+      fullName,
     });
-    setSubmitError(null);
-
-    if (!isValid) return;
-
-    try {
-      setIsSubmitting(true);
-      await onSubmit?.(values);
-    } catch (err) {
-      setSubmitError(
-        err instanceof Error ? err.message : "Something went wrong. Try again.",
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
   };
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setTouched({
+  //     email: true,
+  //     companyName: true,
+  //     fullName: true,
+  //     password: true,
+  //     acceptTerms: true,
+  //   });
+  //   setSubmitError(null);
+
+  //   if (!isValid) return;
+
+  //   try {
+  //     setIsSubmitting(true);
+  //     await onSubmit?.(values);
+  //   } catch (err) {
+  //     setSubmitError(
+  //       err instanceof Error ? err.message : "Something went wrong. Try again.",
+  //     );
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <div className="auth-card">
@@ -127,8 +141,6 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
       <p className="auth-subtitle">Set up teamsyc for your team in a minute.</p>
 
       <form className="auth-form" onSubmit={handleSubmit} noValidate>
-        {submitError && <div className="auth-submit-error">{submitError}</div>}
-
         <Input
           label="Email"
           type="email"
@@ -193,10 +205,14 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
           error={touched.acceptTerms ? errors.acceptTerms : undefined}
         />
 
+        {/*success and error */}
+        {isError && <div className="auth-submit-error">{error.message}</div>}
+        {isSuccess && <div className="auth-submit-success">{data.message}</div>}
+
         <Button
           type="submit"
           fullWidth
-          isLoading={isSubmitting}
+          isLoading={isPending}
           disabled={!isValid}
         >
           Create account
@@ -211,8 +227,6 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
           Log in
         </a>
       </div>
-
-
     </div>
   );
 };
