@@ -31,8 +31,8 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
       path: "/employees",
       icon: "users",
       children: [
-        { label: "Add Employee", path: "/employees/add" },
-        { label: "View Employees", path: "/employees" },
+        { label: "Add Employee", path: "/dashboard/employees/add" },
+        { label: "View Employees", path: "/dashboard/employees/manage" },
       ],
     },
     {
@@ -40,8 +40,9 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
       path: "/projects",
       icon: "folder",
       children: [
-        { label: "Add Project", path: "/projects/add" },
-        { label: "View Projects", path: "/projects" },
+        { label: "Add Project", path: "/dashboard/projects/add" },
+        { label: "View All Projects", path: "/dashboard/projects/all" },
+        { label: "Projects by me", path: "/dashboard/projects/assigned_by_me" },
       ],
     },
     {
@@ -49,8 +50,9 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
       path: "/tasks",
       icon: "check-square",
       children: [
-        { label: "Add Task", path: "/tasks/add" },
-        { label: "View Tasks", path: "/tasks" },
+        { label: "Add Task", path: "/dashboard/tasks/add" },
+        { label: "View Tasks", path: "/dashboard/tasks/all" },
+        { label: "Tasks by me", path: "/dashboard/tasks/assigned_by_me" },
       ],
     },
     {

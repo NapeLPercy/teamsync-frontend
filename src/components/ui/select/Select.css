@@ -1,0 +1,75 @@
+.selectGroup,
+.selectGroup *,
+.selectGroup *::before,
+.selectGroup *::after {
+  box-sizing: border-box;
+}
+
+.selectGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selectLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectField {
+  width: 100%;
+  height: 36px;
+  padding: 0 32px 0 10px;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+}
+
+.selectField:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-text-muted);
+}
+
+.selectField:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.selectField:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.selectField.selectError {
+  border-color: var(--color-error);
+}
+
+.selectChevron {
+  position: absolute;
+  right: 10px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.selectHelper {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.selectHelper.selectHelperError {
+  color: var(--color-error);
+}

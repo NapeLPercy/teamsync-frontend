@@ -68,10 +68,7 @@ interface CreateAccountFormProps {
   onLoginClick?: () => void;
 }
 
-export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
-  onSubmit,
-  onLoginClick,
-}) => {
+export const CreateAccountForm: React.FC<CreateAccountFormProps> = () => {
   const [values, setValues] = useState<CreateAccountValues>({
     email: "",
     companyName: "",
@@ -80,8 +77,6 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     acceptTerms: false,
   });
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [submitError, setSubmitError] = useState<string | null>(null);
 
   const { data, isPending, isError, error, isSuccess, mutate } = useRegister();
 
@@ -110,30 +105,6 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
       fullName,
     });
   };
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setTouched({
-  //     email: true,
-  //     companyName: true,
-  //     fullName: true,
-  //     password: true,
-  //     acceptTerms: true,
-  //   });
-  //   setSubmitError(null);
-
-  //   if (!isValid) return;
-
-  //   try {
-  //     setIsSubmitting(true);
-  //     await onSubmit?.(values);
-  //   } catch (err) {
-  //     setSubmitError(
-  //       err instanceof Error ? err.message : "Something went wrong. Try again.",
-  //     );
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
 
   return (
     <div className="auth-card">
@@ -223,7 +194,7 @@ export const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
 
       <div className="auth-footer">
         Already have an account?{" "}
-        <a className="auth-link" href="/sign-in" onClick={onLoginClick}>
+        <a className="auth-link" href="/sign-in">
           Log in
         </a>
       </div>

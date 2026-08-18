@@ -1,0 +1,35 @@
+.emptyState,
+.emptyState *,
+.emptyState *::before,
+.emptyState *::after {
+  box-sizing: border-box;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.emptyStateIcon {
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.emptyStateTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.emptyStateMessage {
+  max-width: 24rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}

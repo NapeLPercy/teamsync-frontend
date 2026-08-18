@@ -1,0 +1,175 @@
+.viewTasksPage,
+.viewTasksPage *,
+.viewTasksPage *::before,
+.viewTasksPage *::after {
+  box-sizing: border-box;
+}
+
+.viewTasksPage {
+  width: 100%;
+}
+
+.vtHeader {
+  margin-bottom: 1.25rem;
+}
+
+.vtTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.vtSubtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.vtToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.vtSearch {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.vtFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex: 1 1 280px;
+}
+
+.vtFilters > * {
+  flex: 1 1 140px;
+  min-width: 120px;
+}
+
+.vtGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.vtCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.vtCardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vtPriority {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.vtPrioritySuccess {
+  color: var(--color-success);
+  background-color: #dcfce7;
+}
+
+.vtPriorityWarning {
+  color: var(--color-warning);
+  background-color: #fef3c7;
+}
+
+.vtPriorityError {
+  color: var(--color-error);
+  background-color: #fef2f2;
+}
+
+.vtStatus {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.vtName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.vtDescription {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.vtMeta {
+  display: flex;
+  gap: 1.25rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.vtMetaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--color-text);
+}
+
+.vtMetaLabel {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.vtActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.vtNoResults {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-surface);
+}
+
+@media (max-width: 640px) {
+  .vtFilters > * {
+    flex: 1 1 100%;
+  }
+
+  .vtGrid {
+    grid-template-columns: 1fr;
+  }
+}

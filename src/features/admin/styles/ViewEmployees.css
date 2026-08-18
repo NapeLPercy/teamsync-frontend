@@ -1,0 +1,176 @@
+.viewEmployeesPage,
+.viewEmployeesPage *,
+.viewEmployeesPage *::before,
+.viewEmployeesPage *::after {
+  box-sizing: border-box;
+}
+
+.viewEmployeesPage {
+  width: 100%;
+}
+
+.veHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.veTitle {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.veSubtitle {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.veToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.veSearch {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.veFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex: 2 1 360px;
+}
+
+.veFilters > * {
+  flex: 1 1 140px;
+  min-width: 120px;
+}
+
+.veTableWrapper {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-surface);
+  overflow-x: auto;
+}
+
+.veTable {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.veTable th {
+  padding: 0;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background);
+}
+
+.veSortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.veSortButton:hover {
+  color: var(--color-text);
+}
+
+.veSortIconIdle {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.veSortIconActive {
+  color: var(--color-primary);
+}
+
+.veTable td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.veTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.veTable tbody tr:hover {
+  background-color: var(--color-background);
+}
+
+.veNameCell {
+  font-weight: 600;
+}
+
+.veMutedCell {
+  color: var(--color-text-muted);
+}
+
+.veBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.veBadgeSuccess {
+  color: var(--color-success);
+  background-color: #dcfce7;
+}
+
+.veBadgeMuted {
+  color: var(--color-text-muted);
+  background-color: var(--color-background);
+}
+
+.veEmptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+.veActions {
+  display: flex;
+  gap: 0.5rem;
+}
+@media (max-width: 640px) {
+  .veHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .veFilters > * {
+    flex: 1 1 100%;
+  }
+}

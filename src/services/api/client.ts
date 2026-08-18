@@ -1,5 +1,4 @@
 const API_URL = import.meta.env.VITE_SB_API_URL;
-console.log("here is the url",API_URL);
 async function apiClient<T>(
   endpoint: string,
   options?: RequestInit,

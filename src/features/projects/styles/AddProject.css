@@ -1,0 +1,165 @@
+.addProjectPage,
+.addProjectPage *,
+.addProjectPage *::before,
+.addProjectPage *::after {
+  box-sizing: border-box;
+}
+
+.addProjectPage {
+  width: 100%;
+  max-width: 640px;
+}
+
+.addProjectHeader {
+  margin-bottom: 1.5rem;
+}
+
+.addProjectTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.addProjectSubtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.addProjectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.addProjectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.addProjectFieldFull {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addProjectTextareaLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.addProjectTextarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.12s ease;
+}
+
+.addProjectTextarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.addProjectTextarea:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-text-muted);
+}
+
+.addProjectTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.addProjectTextarea.addProjectTextareaError {
+  border-color: var(--color-error);
+}
+
+.addProjectTextareaHelper {
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+.addProjectInlineLoader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  margin-top: auto;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.addProjectInlineSpinner {
+  color: var(--color-primary);
+  animation: add-project-spin 0.7s linear infinite;
+}
+
+@keyframes add-project-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.addProjectActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addProjectError {
+  font-size: 0.8125rem;
+  color: var(--color-error);
+  background-color: #fef2f2;
+  border: 1px solid var(--color-error);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+}
+
+.addProjectSuccess {
+  font-size: 0.8125rem;
+  color: var(--color-success);
+  background-color: #f0fdf4;
+  border: 1px solid var(--color-success);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .addProjectInlineSpinner {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .addProjectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .addProjectCard {
+    padding: 1.25rem;
+  }
+
+  .addProjectActions {
+    justify-content: stretch;
+  }
+
+  .addProjectActions button {
+    width: 100%;
+  }
+}
