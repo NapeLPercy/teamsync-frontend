@@ -16,6 +16,7 @@ import AddTask from "./features/task/components/AddTask";
 
 /*tasks */
 import CompanyTasks from "./features/task/components/CompanyTasks";
+import CompanyTasksByMe from "./features/task/components/CompanyTasksByMe";
 function App() {
   return (
     <Routes>
@@ -36,6 +37,7 @@ function App() {
         />
         <Route path="tasks/add" element={<AddTask />} />
         <Route path="tasks/all" element={<CompanyTasks />} />
+        <Route path="tasks/assigned_by_me" element={<CompanyTasksByMe />} />
       </Route>
     </Routes>
   );

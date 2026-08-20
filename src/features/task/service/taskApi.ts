@@ -37,3 +37,9 @@ export function getAllTasks() {
     method: "GET",
   });
 }
+
+export function getAllTasksByMe() {
+  return apiClient<GetTaskResponse>("/api/tasks/my", {
+    method: "GET",
+  });
+}
