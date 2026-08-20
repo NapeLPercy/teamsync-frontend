@@ -7,6 +7,7 @@ export interface ProjectsDetailsResponse {
 export interface ProjectsDetails {
   id: string;
   name: string;
+  dueDate:string;
 }
 export function useGetProjectsDetails() {
   return useQuery<ProjectsDetailsResponse>({

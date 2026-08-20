@@ -27,6 +27,7 @@ interface TaskErrors {
   dueDate?: string;
   projectId?: string;
   assignedTo?: string;
+  lateTaskDueDate?: string;
 }
 
 const PRIORITY_OPTIONS: SelectOption[] = [
@@ -112,11 +113,27 @@ export const AddTask: React.FC = () => {
 
   const projectOptions: SelectOption[] = useMemo(
     () =>
-      projects.map((project) => ({ value: project.id, label: project.name })),
+      projects.map((project) => ({
+        value: project.id,
+        label: project.name + "-- due date (" + project?.dueDate + ")",
+      })),
     [projects],
   );
+  //ensure task due date is within the projectDue data
+  const validateTaskDueDate = (projects, selectedProjectId, taskDueDate) => {
+    if (!projects || !selectedProjectId || !taskDueDate) return;
+
+    const project = projects.find((p) => p.id === selectedProjectId);
+    if (!project || !project.dueDate) return;
+
+    if (new Date(taskDueDate) > new Date(project.dueDate))
+      errors.lateTaskDueDate = "Task due date cannot be after Project due date";
+  };
 
   const errors = validate(values);
+
+  validateTaskDueDate(projects, values.projectId, values.dueDate);
+
   const isValid = Object.keys(errors).length === 0;
 
   const handleChange =
@@ -167,10 +184,13 @@ export const AddTask: React.FC = () => {
           </div>
         )}
 
+        {errors.lateTaskDueDate && !isError && (
+          <div className="addTaskError">{errors.lateTaskDueDate}</div>
+        )}
+
         {isSuccess && (
           <div className="addTaskSuccess">Task created successfully.</div>
         )}
-
         <div className="addTaskGrid">
           <Input
             label="Title"
@@ -192,7 +212,6 @@ export const AddTask: React.FC = () => {
             error={touched.dueDate ? errors.dueDate : undefined}
           />
         </div>
-
         <div className="addTaskGrid">
           <Select
             label="Priority"
@@ -238,7 +257,6 @@ export const AddTask: React.FC = () => {
             />
           )}
         </div>
-
         <div className="addTaskGrid">
           {employeesLoading ? (
             <div className="addTaskInlineLoader">
@@ -274,7 +292,6 @@ export const AddTask: React.FC = () => {
             />
           )}
         </div>
-
         <div className="addTaskGrid">
           <div className="addTaskFieldFull">
             <label className="addTaskTextareaLabel" htmlFor="task-description">
@@ -300,7 +317,6 @@ export const AddTask: React.FC = () => {
             )}
           </div>
         </div>
-
         <div className="addTaskActions">
           <Button
             type="submit"

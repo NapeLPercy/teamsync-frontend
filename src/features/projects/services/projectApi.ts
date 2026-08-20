@@ -47,6 +47,7 @@ export interface ProjectsDetailsResponse {
 export interface ProjectsDetails {
   id: string;
   name: string;
+  dueDate: string;
 }
 export function getProjectsDetails() {
   return apiClient<ProjectsDetailsResponse>("/api/projects/details", {
