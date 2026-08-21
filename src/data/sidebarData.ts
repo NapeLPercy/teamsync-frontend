@@ -13,7 +13,8 @@ export interface SidebarItem {
     | "check-square"
     | "briefcase"
     | "bar-chart"
-    | "settings";
+    | "settings"
+    | "messages-square";
   children?: SidebarSubItem[];
 }
 
@@ -55,6 +56,15 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
         { label: "Tasks by me", path: "/dashboard/tasks/assigned_by_me" },
       ],
     },
+    // {
+    //   label: "Comments",
+    //   path: "/comments",
+    //   icon: "messages-square",
+    //   children: [
+    //     { label: "Add Client", path: "/clients/add" },
+    //     { label: "View Comment", path: "/comments/" },
+    //   ],
+    // },
     {
       label: "Clients",
       path: "/clients",

@@ -68,6 +68,11 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
     });
   }, [tasks, search, statusFilter, priorityFilter]);
 
+  const handleViewComments = (task) => {
+    navigate(`/dashboard/tasks/${task.id}/comments`, {
+      state: { task },
+    });
+  };
   return (
     <div className="viewTasksPage">
       <div className="vtHeader">
@@ -142,6 +147,15 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
                   Delete
                 </Button>
               )}
+
+              <Button
+                type="button"
+                variant="primary"
+                size="sm"
+                onClick={() => handleViewComments(task)}
+              >
+                Comments
+              </Button>
             </div>
           </div>
         ))}

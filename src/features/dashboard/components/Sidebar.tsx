@@ -24,7 +24,7 @@ const ICONS: Record<string, LucideIcon> = {
   "check-square": CheckSquare,
   briefcase: Briefcase,
   "bar-chart": BarChart3,
-  settings: Settings,
+  settings: Settings
 };
 
 const VALID_ROLES: SidebarRole[] = ["ADMIN", "EMPLOYEE"];

@@ -1,0 +1,282 @@
+.tchHeader {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+
+/* -----------------------------
+   Task information
+----------------------------- */
+
+.tchInfo {
+  min-width: 0;
+  flex: 1;
+}
+
+
+.tchTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+
+.tchPriority {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+
+.tchPrioritySuccess {
+  color: var(--color-success);
+  background-color: #dcfce7;
+}
+
+
+.tchPriorityWarning {
+  color: var(--color-warning);
+  background-color: #fef3c7;
+}
+
+
+.tchPriorityError {
+  color: var(--color-error);
+  background-color: #fef2f2;
+}
+
+
+.tchStatus {
+  position: relative;
+  padding-left: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+
+.tchStatus::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-text-muted);
+  transform: translateY(-50%);
+}
+
+
+.tchTitle {
+  margin: 0 0 0.45rem;
+  max-width: 750px;
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-overflow: ellipsis;
+}
+
+
+.tchDescription {
+  max-width: 800px;
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+
+.tchDue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+
+.tchDue::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+
+/* -----------------------------
+   Comment statistics
+----------------------------- */
+
+.tchStats {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  min-width: 300px;
+  border-left: 1px solid var(--color-border);
+  padding-left: 1.75rem;
+}
+
+
+.tchStatItem {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 85px;
+  padding: 0 1.15rem;
+}
+
+
+.tchStatItem:first-child {
+  padding-left: 0;
+}
+
+
+.tchStatItem:last-child {
+  padding-right: 0;
+}
+
+
+.tchStatItem + .tchStatItem::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 0;
+  width: 1px;
+  background-color: var(--color-border);
+}
+
+
+.tchStatValue {
+  margin-bottom: 0.2rem;
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+
+.tchStatLabel {
+  color: var(--color-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+
+/* -----------------------------
+   Subtle role differentiation
+----------------------------- */
+
+.tchStatItem:nth-child(2) .tchStatValue {
+  color: var(--color-primary);
+}
+
+
+.tchStatItem:nth-child(3) .tchStatValue {
+  color: var(--color-success);
+}
+
+
+/* -----------------------------
+   Hover / interaction
+----------------------------- */
+
+.tchStatItem {
+  transition: transform 0.15s ease;
+}
+
+
+.tchStatItem:hover {
+  transform: translateY(-1px);
+}
+
+
+/* -----------------------------
+   Responsive
+----------------------------- */
+
+@media (max-width: 800px) {
+  .tchHeader {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .tchStats {
+    min-width: 0;
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+    padding-top: 1.25rem;
+    padding-left: 0;
+  }
+
+  .tchStatItem {
+    padding: 0 1rem;
+  }
+
+  .tchStatItem:first-child {
+    padding-left: 0;
+  }
+
+  .tchStatItem:last-child {
+    padding-right: 0;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .tchHeader {
+    padding: 1.15rem;
+  }
+
+  .tchStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tchStatItem {
+    min-width: 0;
+  }
+
+  .tchStatValue {
+    font-size: 1.2rem;
+  }
+
+  .tchStatLabel {
+    font-size: 0.625rem;
+  }
+
+  .tchTitle {
+    font-size: 1.2rem;
+  }
+}

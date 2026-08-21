@@ -1,0 +1,311 @@
+.taskCommentsPage,
+.taskCommentsPage *,
+.taskCommentsPage *::before,
+.taskCommentsPage *::after {
+  box-sizing: border-box;
+}
+
+.taskCommentsPage {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Layout — list scrolls, form panel does not
+   ========================================================================== */
+
+.tcLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.tcListPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.tcFormPanel {
+  position: sticky;
+  top: 0;
+}
+
+/* ==========================================================================
+   Comment list — social feed style
+   ========================================================================== */
+
+.tcComment {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.tcAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tcCommentBody {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.tcCommentMeta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.tcCommentDate {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.tcCommentName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.tcCommentRole {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: capitalize;
+}
+
+.tcCommentText {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* ==========================================================================
+   Comment form (shared between desktop panel and mobile sheet)
+   ========================================================================== */
+
+.tcForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.tcFormHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tcFormTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.tcMobileClose {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.tcMobileClose:hover {
+  background-color: var(--color-background);
+}
+
+.tcFormError {
+  font-size: 0.8125rem;
+  color: var(--color-error);
+  background-color: #fef2f2;
+  border: 1px solid var(--color-error);
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+}
+.tcFormSuccess {
+  font-size: 0.8125rem;
+  color: var(--color-success);
+  background-color: #fef2f2;
+  border: 1px solid var(--color-success);
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+}
+
+.tcTextarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  transition:
+    border-color 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.tcTextarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.tcTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+}
+
+.tcSendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.tcSendButton:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.tcSendButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Mobile: FAB + slide-down sheet, hidden entirely on desktop
+   ========================================================================== */
+
+.tcMobileFab {
+  display: none;
+}
+
+.tcMobileFormSheet {
+  display: none;
+}
+
+.tcMobileBackdrop {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .tcLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .tcListPanel {
+    max-height: none;
+    overflow-y: visible;
+    padding-bottom: 5rem;
+  }
+
+  .tcFormPanel {
+    display: none;
+  }
+
+  .tcMobileFab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
+    height: 44px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 22px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tcMobileFab:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .tcMobileBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background-color: rgba(24, 24, 27, 0.4);
+  }
+
+  .tcMobileFormSheet {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 70;
+    padding: 1rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-100%);
+    transition: transform 0.22s ease;
+  }
+
+  .tcMobileFormOpen {
+    transform: translateY(0);
+  }
+
+  .tcMobileFormSheet .tcMobileClose {
+    display: inline-flex;
+  }
+}
+
+/* When the meta content wraps, put the date on the left */
+@media (max-width: 500px) {
+  .tcCommentDate {
+    margin-left: 0;
+  }
+}

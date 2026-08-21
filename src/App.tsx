@@ -17,6 +17,7 @@ import AddTask from "./features/task/components/AddTask";
 /*tasks */
 import CompanyTasks from "./features/task/components/CompanyTasks";
 import CompanyTasksByMe from "./features/task/components/CompanyTasksByMe";
+import CommentsPage from "./features/comments/components/CommentsPage";
 function App() {
   return (
     <Routes>
@@ -27,17 +28,22 @@ function App() {
       {/*DASHBOARD */}
       <Route path="/dashboard" element={<DashboardLayout />}>
         {/* <Route index element={<DashboardHome />} /> */}
+
         <Route path="employees/add" element={<AddEmployee />} />
         <Route path="employees/manage" element={<ViewEmployees />} />
+
         <Route path="projects/add" element={<AddProject />} />
         <Route path="projects/all" element={<CompanyProjects />} />
         <Route
           path="projects/assigned_by_me"
           element={<CompanyProjectsByMe />}
         />
+
         <Route path="tasks/add" element={<AddTask />} />
         <Route path="tasks/all" element={<CompanyTasks />} />
         <Route path="tasks/assigned_by_me" element={<CompanyTasksByMe />} />
+
+        <Route path="tasks/:id/comments" element={<CommentsPage />} />
       </Route>
     </Routes>
   );
