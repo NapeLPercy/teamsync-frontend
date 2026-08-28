@@ -4,6 +4,8 @@ import { Search } from "lucide-react";
 import Button from "../../../../components/ui/button/Button";
 import Input from "../../../../components/ui/input/Input";
 import Select from "../../../../components/ui/select/Select";
+import Modal from "../../../../components/ui/modal/Modal";
+import { useDeleteTask } from "../../hooks/useTasks";
 import "../../styles/ViewTasks.css";
 
 export interface Task {
@@ -37,13 +39,14 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
   subText,
   tasks,
   user,
-  onDelete,
 }) => {
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState(ALL);
   const [priorityFilter, setPriorityFilter] = useState(ALL);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   const statusOptions = useMemo(
     () => [ALL, ...Array.from(new Set(tasks.map((t) => t.status)))],
@@ -73,8 +76,43 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
       state: { task },
     });
   };
+
+  const { mutate, isPending, isError, isSuccess, error } = useDeleteTask();
+
+  const handleDelete = (id: string) => {
+    setSelectedTaskId(id);
+    setIsOpen(true);
+  };
+
+  const deleteTask = () => {
+    if (!selectedTaskId) return;
+
+    mutate(selectedTaskId, {
+      onSuccess: () => {
+        setIsOpen(false);
+        setSelectedTaskId(null);
+      },
+    });
+  };
+
   return (
     <div className="viewTasksPage">
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onConfirm={() => deleteTask()}
+          title="Delete Task?"
+          message="This will permanently remove a task and its data. This can't be undone."
+          confirmLabel="Delete"
+          confirmVariant="danger"
+          isLoading={isPending}
+          isError={isError}
+          errorMessage={isError ? error?.message : "Failed to delete task"}
+          isSuccess={isSuccess}
+          successMessage="Task successfully deleted."
+        />
+      )}
       <div className="vtHeader">
         <h1 className="vtTitle">{headerText}</h1>
         <p className="vtSubtitle">{subText}</p>
@@ -142,7 +180,7 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
                   type="button"
                   variant="danger"
                   size="sm"
-                  onClick={() => onDelete?.(task.id)}
+                  onClick={() => handleDelete?.(task.id)}
                 >
                   Delete
                 </Button>

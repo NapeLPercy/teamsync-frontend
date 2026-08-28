@@ -32,6 +32,8 @@ export interface Task {
   createdAt: string;
 }
 
+/*DELETE TASK */
+
 export function getAllTasks() {
   return apiClient<GetTaskResponse>("/api/tasks/", {
     method: "GET",
@@ -41,5 +43,12 @@ export function getAllTasks() {
 export function getAllTasksByMe() {
   return apiClient<GetTaskResponse>("/api/tasks/my", {
     method: "GET",
+  });
+}
+
+export function deleteTask(taskId: string) {
+
+  return apiClient(`/api/tasks/${taskId}`, {
+    method: "DELETE",
   });
 }

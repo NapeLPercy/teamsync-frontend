@@ -1,5 +1,10 @@
-import { addTask, getAllTasks, getAllTasksByMe } from "../service/taskApi";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  addTask,
+  getAllTasks,
+  getAllTasksByMe,
+  deleteTask,
+} from "../service/taskApi";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export interface GetTaskResponse {
   tasks: Task[];
@@ -36,5 +41,16 @@ export function useGetAllTasksByMe() {
     queryKey: ["company_tasks_by_me"],
     queryFn: getAllTasksByMe,
     retry: false,
+  });
+}
+
+export function useDeleteTask() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (taskId: string) => deleteTask(taskId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["company_tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["company_tasks_by_me"] });
+    },
   });
 }
