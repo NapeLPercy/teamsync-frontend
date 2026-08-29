@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { AlertTriangle, CheckCircle2, X, type LucideIcon } from "lucide-react";
 import Button from "../button/Button";
+import SubmitError from "../states/SubmitError";
 import "./Modal.css";
 
 type ConfirmVariant = "primary" | "danger" | "secondary";
@@ -101,9 +102,9 @@ export const Modal: React.FC<ConfirmModalProps> = ({
         </p>
 
         {isError && !isSuccess && (
-          <div className="cmError">
-            {errorMessage ?? "Something went wrong. Try again."}
-          </div>
+          <SubmitError
+            message={errorMessage ?? "Something went wrong. Try again."}
+          />
         )}
 
         {isSuccess ? (

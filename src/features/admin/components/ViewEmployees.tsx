@@ -141,7 +141,7 @@ export function ViewEmployees() {
     mutate(selectedEmployeeId, {
       onSuccess: () => {
         setSelectedEmployeeId(null);
-        setIsOpen(false);
+        //setIsOpen(false);
       },
     });
   };
