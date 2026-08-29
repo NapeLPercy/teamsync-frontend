@@ -1,6 +1,5 @@
 import apiClient from "../../../services/api/client";
 
-
 // interface GetEmployeesResponse {
 //   Employee: [];
 // }
@@ -38,5 +37,11 @@ export interface Employee {
 export function fetchAllEmployees(): Promise<GetEmployeesResponse> {
   return apiClient("/api/admin/employees", {
     method: "GET",
+  });
+}
+
+export function deleteEmployee(id) {
+  return apiClient(`/api/admin/employee/${id}`, {
+    method: "DELETE",
   });
 }

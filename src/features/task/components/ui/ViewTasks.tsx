@@ -23,7 +23,6 @@ interface ViewTasksProps {
   subText: string;
   tasks: Task[];
   user: "ADMIN" | "EMPLOYEE";
-  onDelete?: (id: string) => void;
 }
 
 const ALL = "All";

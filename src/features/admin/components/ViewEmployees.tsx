@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from "react";
 import { ArrowUp, ArrowDown, ArrowUpDown, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useGetAllEmployees } from "../hooks/useGetAllEmployees";
+import { useGetAllEmployees, useDeleteEmployee } from "../hooks/useEmployees";
 import Input from "../../../components/ui/input/Input";
 import Select from "../../../components/ui/select/Select";
 import Button from "../../../components/ui/button/Button";
+import Modal from "../../../components/ui/modal/Modal";
 import "../styles/ViewEmployees.css";
 
 interface Employee {
@@ -30,6 +31,13 @@ const ALL = "All";
 
 export function ViewEmployees() {
   const { data, isLoading, isError, error } = useGetAllEmployees();
+  const {
+    mutate,
+    isPending,
+    isError: isDeleteError,
+    isSuccess,
+    error: deleteError,
+  } = useDeleteEmployee();
 
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState(ALL);
@@ -37,6 +45,10 @@ export function ViewEmployees() {
   const [activeFilter, setActiveFilter] = useState(ALL);
   const [sortField, setSortField] = useState<SortField>("fullName");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(
+    null,
+  );
 
   const navigate = useNavigate();
 
@@ -120,13 +132,18 @@ export function ViewEmployees() {
   };
 
   const handleDelete = (userId: string) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this employee?",
-    );
-    if (!confirmed) return;
+    setSelectedEmployeeId(userId);
+    setIsOpen(true);
+  };
 
-    // wire up your delete mutation here, e.g.:
-    // deleteEmployee(userId);
+  const deleteEmployee = () => {
+    if (!selectedEmployeeId) return;
+    mutate(selectedEmployeeId, {
+      onSuccess: () => {
+        setSelectedEmployeeId(null);
+        setIsOpen(false);
+      },
+    });
   };
 
   const handleViewMore = (userId: string) => {
@@ -147,6 +164,22 @@ export function ViewEmployees() {
 
   return (
     <div className="viewEmployeesPage">
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onConfirm={() => deleteEmployee()}
+          title="Delete Employee?"
+          message="This will permanently remove the employee and its data. This can't be undone."
+          confirmLabel="Delete"
+          confirmVariant="danger"
+          isLoading={isPending}
+          isError={isDeleteError}
+          errorMessage={isDeleteError ? deleteError?.message : "Failed to delete employee"}
+          isSuccess={isSuccess}
+          successMessage="Employee successfully deleted."
+        />
+      )}
       <div className="veHeader">
         <h1 className="veTitle">Employees</h1>
         <p className="veSubtitle">

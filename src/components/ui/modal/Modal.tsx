@@ -64,7 +64,9 @@ export const Modal: React.FC<ConfirmModalProps> = ({
   if (!isOpen) return null;
 
   const displayIcon = isSuccess ? CheckCircle2 : Icon;
-  const iconClass = isSuccess ? "cmIconSuccess" : VARIANT_ICON_CLASS[confirmVariant];
+  const iconClass = isSuccess
+    ? "cmIconSuccess"
+    : VARIANT_ICON_CLASS[confirmVariant];
   const DisplayIcon = displayIcon;
 
   return createPortal(
@@ -95,16 +97,23 @@ export const Modal: React.FC<ConfirmModalProps> = ({
         </h2>
 
         <p className="cmMessage">
-          {isSuccess ? successMessage ?? "Done." : message}
+          {isSuccess ? (successMessage ?? "Done.") : message}
         </p>
 
         {isError && !isSuccess && (
-          <div className="cmError">{errorMessage ?? "Something went wrong. Try again."}</div>
+          <div className="cmError">
+            {errorMessage ?? "Something went wrong. Try again."}
+          </div>
         )}
 
         {isSuccess ? (
           <div className="cmActions">
-            <Button type="button" variant="secondary" fullWidth onClick={onClose}>
+            <Button
+              type="button"
+              variant="secondary"
+              fullWidth
+              onClick={onClose}
+            >
               Close
             </Button>
           </div>
@@ -130,8 +139,23 @@ export const Modal: React.FC<ConfirmModalProps> = ({
         )}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
 
 export default Modal;
+
+// <Modal
+//           isOpen={isOpen}
+//           onClose={() => setIsOpen(false)}
+//           onConfirm={() => deleteTask()}
+//           title="Delete Task?"
+//           message="This will permanently remove a task and its data. This can't be undone."
+//           confirmLabel="Delete"
+//           confirmVariant="danger"
+//           isLoading={isPending}
+//           isError={isError}
+//           errorMessage={isError ? error?.message : "Failed to delete task"}
+//           isSuccess={isSuccess}
+//           successMessage="Task successfully deleted."
+//         />

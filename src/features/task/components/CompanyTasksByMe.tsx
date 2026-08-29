@@ -9,17 +9,6 @@ export function CompanyTasksByMe() {
 
   const tasks = data?.tasks ?? [];
 
-
-  const handleDelete = (id: string) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this task?",
-    );
-    if (!confirmed) return;
-
-    // wire up your delete mutation here, e.g.:
-    // deleteTask(id);
-  };
-
   if (isLoading) {
     return <LoadingState text="Loading tasks..." />;
   }
@@ -50,7 +39,6 @@ export function CompanyTasksByMe() {
       subText="All tasks created by you."
       tasks={tasks}
       user={"ADMIN"}
-      onDelete={handleDelete}
     />
   );
 }
