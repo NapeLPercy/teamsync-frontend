@@ -96,22 +96,21 @@ export const ViewTasks: React.FC<ViewTasksProps> = ({
 
   return (
     <div className="viewTasksPage">
-      {isOpen && (
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onConfirm={() => deleteTask()}
-          title="Delete Task?"
-          message="This will permanently remove a task and its data. This can't be undone."
-          confirmLabel="Delete"
-          confirmVariant="danger"
-          isLoading={isPending}
-          isError={isError}
-          errorMessage={isError ? error?.message : "Failed to delete task"}
-          isSuccess={isSuccess}
-          successMessage="Task successfully deleted."
-        />
-      )}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => deleteTask()}
+        title="Delete Task?"
+        message="This will permanently remove a task and its data. This can't be undone."
+        confirmLabel="Delete"
+        confirmVariant="danger"
+        isLoading={isPending}
+        isError={isError}
+        errorMessage={isError ? error?.message : "Failed to delete task"}
+        isSuccess={isSuccess}
+        successMessage="Task successfully deleted."
+      />
+
       <div className="vtHeader">
         <h1 className="vtTitle">{headerText}</h1>
         <p className="vtSubtitle">{subText}</p>

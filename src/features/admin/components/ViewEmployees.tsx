@@ -164,22 +164,23 @@ export function ViewEmployees() {
 
   return (
     <div className="viewEmployeesPage">
-      {isOpen && (
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onConfirm={() => deleteEmployee()}
-          title="Delete Employee?"
-          message="This will permanently remove the employee and its data. This can't be undone."
-          confirmLabel="Delete"
-          confirmVariant="danger"
-          isLoading={isPending}
-          isError={isDeleteError}
-          errorMessage={isDeleteError ? deleteError?.message : "Failed to delete employee"}
-          isSuccess={isSuccess}
-          successMessage="Employee successfully deleted."
-        />
-      )}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => deleteEmployee()}
+        title="Delete Employee?"
+        message="This will permanently remove the employee and its data. This can't be undone."
+        confirmLabel="Delete"
+        confirmVariant="danger"
+        isLoading={isPending}
+        isError={isDeleteError}
+        errorMessage={
+          isDeleteError ? deleteError?.message : "Failed to delete employee"
+        }
+        isSuccess={isSuccess}
+        successMessage="Employee successfully deleted."
+      />
+
       <div className="veHeader">
         <h1 className="veTitle">Employees</h1>
         <p className="veSubtitle">

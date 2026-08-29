@@ -54,3 +54,10 @@ export function getProjectsDetails() {
     method: "GET",
   });
 }
+
+/*DELETE PROJECT */
+export function deleteProject(id: string) {
+  return apiClient(`/api/projects/${id}`, {
+    method: "DELETE",
+  });
+}
