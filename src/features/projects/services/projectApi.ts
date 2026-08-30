@@ -33,13 +33,18 @@ export function getCompanyProjects() {
     method: "GET",
   });
 }
-//get projects by one role
+
+//get projects by ADMIN role
 export function getCompanyProjectsByMe() {
   return apiClient<GetProjectResponse>("/api/projects/my", {
     method: "GET",
   });
 }
 
+//get projects by EMPLOYEE role
+export function getCompanyProjectsForMe() {
+  return apiClient<GetProjectResponse>("/api/projects/for_me", { method: "GET" });
+}
 /*PROJECTS DETAILS */
 export interface ProjectsDetailsResponse {
   projects: ProjectsDetails[];

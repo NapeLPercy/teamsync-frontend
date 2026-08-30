@@ -56,15 +56,6 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
         { label: "Tasks by me", path: "/dashboard/tasks/assigned_by_me" },
       ],
     },
-    // {
-    //   label: "Comments",
-    //   path: "/comments",
-    //   icon: "messages-square",
-    //   children: [
-    //     { label: "Add Client", path: "/clients/add" },
-    //     { label: "View Comment", path: "/comments/" },
-    //   ],
-    // },
     {
       label: "Clients",
       path: "/clients",
@@ -91,24 +82,25 @@ export const sidebarItems: Record<SidebarRole, SidebarItem[]> = {
       path: "/dashboard",
       icon: "dashboard",
     },
+
     {
-      label: "My Projects",
+      label: "Projects",
       path: "/projects",
       icon: "folder",
-    },
-    {
-      label: "My Tasks",
-      path: "/tasks",
-      icon: "check-square",
       children: [
-        { label: "Add Task", path: "/tasks/add" },
-        { label: "View Tasks", path: "/tasks" },
+        {
+          label: "Projects for me",
+          path: "/dashboard/projects/assigned_for_me",
+        },
       ],
     },
     {
-      label: "Clients",
-      path: "/clients",
-      icon: "briefcase",
+      label: "Tasks",
+      path: "/tasks",
+      icon: "check-square",
+      children: [
+        { label: "Tasks for me", path: "/dashboard/tasks/assigned_for_me" },
+      ],
     },
     {
       label: "Settings",

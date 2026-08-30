@@ -12,11 +12,13 @@ import { ViewEmployees } from "./features/admin/components/ViewEmployees";
 import AddProject from "./features/projects/components/Addproject";
 import { CompanyProjects } from "./features/projects/components/AllCompanyProjects";
 import { CompanyProjectsByMe } from "./features/projects/components/CompanyProjectsByMe";
+import { CompanyProjectsForMe } from "./features/projects/components/CompanyProjectsForMe";
 import AddTask from "./features/task/components/AddTask";
 
 /*tasks */
 import CompanyTasks from "./features/task/components/CompanyTasks";
 import CompanyTasksByMe from "./features/task/components/CompanyTasksByMe";
+import CompanyTasksForMe from "./features/task/components/CompanyTasksForMe";
 import CommentsPage from "./features/comments/components/CommentsPage";
 function App() {
   return (
@@ -44,6 +46,14 @@ function App() {
         <Route path="tasks/assigned_by_me" element={<CompanyTasksByMe />} />
 
         <Route path="tasks/:id/comments" element={<CommentsPage />} />
+
+        {/*EMPLOYEE */}
+        <Route
+          path="projects/assigned_for_me"
+          element={<CompanyProjectsForMe />}
+        />
+
+        <Route path="tasks/assigned_for_me" element={<CompanyTasksForMe />} />
       </Route>
     </Routes>
   );
