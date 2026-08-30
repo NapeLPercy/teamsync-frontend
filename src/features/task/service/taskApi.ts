@@ -46,8 +46,12 @@ export function getAllTasksByMe() {
   });
 }
 
+export function getAllTasksForMe() {
+  return apiClient<GetTaskResponse>("/api/tasks/for_me", {
+    method: "GET",
+  });
+}
 export function deleteTask(taskId: string) {
-
   return apiClient(`/api/tasks/${taskId}`, {
     method: "DELETE",
   });
