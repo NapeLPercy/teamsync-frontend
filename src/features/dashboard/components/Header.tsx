@@ -7,6 +7,7 @@ import {
   LogOut,
   User as UserIcon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 interface HeaderProps {
@@ -15,6 +16,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,6 +38,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar }) => {
     .join("")
     .toUpperCase();
 
+  const handleLogout = () => {
+    setIsMenuOpen(false);
+    logout?.();
+    navigate("/sign-in");
+  };
   return (
     <header className="dashboardHeader">
       <div className="headerLeft">
@@ -93,10 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar }) => {
               <button
                 type="button"
                 className="headerDropdownItem"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  logout?.();
-                }}
+                onClick={handleLogout}
               >
                 <LogOut size={16} />
                 Log out
