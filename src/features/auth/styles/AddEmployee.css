@@ -49,24 +49,6 @@
   justify-content: flex-end;
 }
 
-.addEmployeeError {
-  font-size: 0.8125rem;
-  color: var(--color-error);
-  background-color: #fef2f2;
-  border: 1px solid var(--color-error);
-  border-radius: 4px;
-  padding: 0.6rem 0.75rem;
-}
-
-.addEmployeeSuccess {
-  font-size: 0.8125rem;
-  color: var(--color-success);
-  background-color: #f0fdf4;
-  border: 1px solid var(--color-success);
-  border-radius: 4px;
-  padding: 0.6rem 0.75rem;
-}
-
 /* Below this width, paired inputs stack instead of squeezing into a tight grid */
 @media (max-width: 560px) {
   .addEmployeeGrid {

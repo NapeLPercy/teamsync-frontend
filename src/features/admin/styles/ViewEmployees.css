@@ -140,25 +140,14 @@
   font-weight: 600;
 }
 
-.veBadgeSuccess {
-  color: var(--color-success);
-  background-color: #dcfce7;
-}
+F
 
 .veBadgeMuted {
   color: var(--color-text-muted);
   background-color: var(--color-background);
 }
 
-.veEmptyState {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 2.5rem 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-}
+
 .veActions {
   display: flex;
   gap: 0.5rem;
