@@ -6,6 +6,9 @@ import Input from "../../../components/ui/input/Input";
 import Select from "../../../components/ui/select/Select";
 import Button from "../../../components/ui/button/Button";
 import Modal from "../../../components/ui/modal/Modal";
+import LoadingState from "../../../components/ui/states/LoadingState";
+import ErrorState from "../../../components/ui/states/ErrorState";
+import EmptyState from "../../../components/ui/states/EmptyState";
 import "../styles/ViewEmployees.css";
 
 interface Employee {
@@ -30,10 +33,10 @@ type SortDirection = "asc" | "desc";
 const ALL = "All";
 
 export function ViewEmployees() {
-  const { data, isLoading, isError, error } = useGetAllEmployees();
+  const { data, isPending, isError, error, refetch } = useGetAllEmployees();
   const {
     mutate,
-    isPending,
+    isPending: isDeletePending,
     isError: isDeleteError,
     isSuccess,
     error: deleteError,
@@ -150,15 +153,25 @@ export function ViewEmployees() {
     navigate(`/employees/${userId}`);
   };
 
-  if (isLoading) {
-    return <p>Loading employees...</p>;
+  if (isPending) {
+    return <LoadingState text="Loading employees..." />;
   }
 
   if (isError) {
     return (
-      <p>
-        {error instanceof Error ? error.message : "Failed to load employees."}
-      </p>
+      <ErrorState
+        message={error?.message ?? "Failed to load employees."}
+        onRetry={refetch}
+      />
+    );
+  }
+
+  if (!isPending && employees?.length === 0) {
+    return (
+      <EmptyState
+        title="No employees yet"
+        message="Employees within your company will show up here."
+      />
     );
   }
 
@@ -172,7 +185,7 @@ export function ViewEmployees() {
         message="This will permanently remove the employee and its data. This can't be undone."
         confirmLabel="Delete"
         confirmVariant="danger"
-        isLoading={isPending}
+        isLoading={isDeletePending}
         isError={isDeleteError}
         errorMessage={
           isDeleteError ? deleteError?.message : "Failed to delete employee"
@@ -322,10 +335,11 @@ export function ViewEmployees() {
         </table>
 
         {visibleEmployees.length === 0 && (
-          <div className="veEmptyState">
-            <Search size={18} />
-            <span>No employees match your search or filters.</span>
-          </div>
+          <EmptyState
+            icon={Search}
+            title="No employees"
+            message="No employees match your search or filters."
+          />
         )}
       </div>
     </div>

@@ -3,6 +3,8 @@ import { useAddEmployee } from "../hooks/useAddEmployee";
 import { Button } from "../../../components/ui/button/Button";
 import Input from "../../../components/ui/input/Input";
 import Select from "../../../components/ui/select/Select";
+import SubmitSuccess from "../../../components/ui/states/SubmitSuccess";
+import SubmitError from "../../../components/ui/states/SubmitError";
 import "../styles/AddEmployee.css";
 
 interface AddEmployeeValues {
@@ -83,7 +85,7 @@ export const AddEmployee: React.FC = () => {
     mutate({
       fullName: name.trim(),
       email: email.trim(),
-      role: role
+      role: role,
     });
   };
 
@@ -98,16 +100,16 @@ export const AddEmployee: React.FC = () => {
 
       <form className="addEmployeeCard" onSubmit={handleSubmit} noValidate>
         {isError && (
-          <div className="addEmployeeError">
-            {error instanceof Error
-              ? error.message
-              : "Something went wrong. Try again."}
-          </div>
+          <SubmitError
+            message={
+              error instanceof Error
+                ? error.message
+                : "Something went wrong. Try again."
+            }
+          />
         )}
 
-        {isSuccess && (
-          <div className="addEmployeeSuccess">Employee added successfully.</div>
-        )}
+        {isSuccess && <SubmitSuccess message="Employee added successfully" />}
 
         <div className="addEmployeeGrid">
           <Input
