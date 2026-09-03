@@ -37,7 +37,7 @@ function validate(values: AddEmployeeValues): AddEmployeeErrors {
   }
 
   if (!values.role.trim()) {
-    errors.email = "Role is required";
+    errors.role = "Role is required";
   }
 
   return errors;
